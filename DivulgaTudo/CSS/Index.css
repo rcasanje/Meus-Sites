@@ -1,0 +1,14 @@
+#principal{
+	box-shadow:#000000;
+}
+
+#jumbobox_logo{
+	margin-top:30px;
+	padding-left:30px;
+	/*background-color:#CC0000;*/
+	background-image:url(../Imagens/youtube-logo.png);
+	background-position:center;
+	color:#000000;
+	font:bold 26px Tw Cen MT;
+}
+

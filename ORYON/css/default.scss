@@ -1,0 +1,69 @@
+#container{
+	margin-top: -10px;
+}
+
+#noticias{
+	padding-top: 10px;
+	height: 30%;
+}
+
+#campeonatosativos{
+	table{
+		width: 100%;
+		td, tr, th{
+			padding: 3px;
+			border: 1px solid black;
+		}
+	}
+}
+
+#resto{
+	margin-top: 10px;
+}
+
+#rankplayer{
+	table{
+		width: 100%;
+		tr, td, th{
+			padding: 5px;
+			border: 1px solid black;
+		}
+	}
+}
+
+#ranktime{
+	margin-top: 10px;
+	table{ 
+		width: 100%;
+		tr, td, th{
+			padding: 5px;
+			border: 1px solid black;
+		}
+	}
+}
+
+#rodape{
+	background-color: dimgray;
+	color: lightgray;
+}
+
+/* FUNÇÕES FIXAS */
+.autosizeimagem{
+	width: 100%;
+}
+
+.divider{
+	margin-bottom: 10px;
+	border-radius: 10px;
+	border-width: 2px;
+	border-style: solid;
+	.divider-orange{
+		border-color: orange;
+	}
+	.divider-gray{
+		border-color: gray;
+	}
+	.divider-default{
+		border-color: black;
+	}
+}

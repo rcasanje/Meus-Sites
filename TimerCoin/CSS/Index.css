@@ -1,0 +1,15 @@
+#timers{
+	padding:5px;
+	margin-bottom:7px;
+	border:1px solid;
+	border-radius: 5px;
+	box-shadow:2px 2px 2px black;
+}
+
+#timers h4{
+	text-align:center;
+	font-family:"TW Cen MT";
+	font-size:25px;
+	font-stretch:semi-condensed;
+	text-shadow:1px 1px 1px #000000;
+}

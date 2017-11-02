@@ -1,0 +1,79 @@
+body{
+	font-size: 16px;
+	font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif"
+}
+
+.fixar {
+    position:fixed;
+    margin-top: -12.6% !important;
+	width: 100%;
+}
+
+#menufixed{
+	background-color: black;
+}
+
+#inicio{
+	background-image: url(../images/web-developer.jpg);
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	margin-bottom: 0px;
+	h1{
+		color: white;
+	}
+	p{
+		color: white;
+	}
+}
+
+#sobre{
+	background-color: rgb(143,187,162);
+	padding: 10px;
+	border-radius: 10px;
+	margin-left: -34.2%;
+	width: 167.8%;
+	#c_sobre{
+		width: 61.5%;
+	}
+}
+
+#habilidades{
+	#c_habilidades{
+	}
+	#html, #PHP, #MySQL, #JavaWeb, #Java, #VB{
+		margin-top: -10px;
+		margin-bottom: -80px;
+	}
+}
+
+#educacao{
+	background-color: cadetblue;
+	padding: 10px;
+	border-radius: 10px;
+	margin-left: -34.2%;
+	width: 167.8%;
+}
+
+#portfolio{
+	background-color: grey;
+	padding: 10px;
+	border-radius: 10px;
+	margin-left: -34.2%;
+	width: 167.8%;
+	#c_portfolio{
+		width: 61.5%;
+	}
+}
+
+#contatos{
+	background-color: black;
+	color: white;
+	padding: 10px;
+	border-radius: 10px;
+	margin-left: -34.2%;
+	width: 167.8%;
+	#c_portfolio{
+		width: 61.5%;
+	}
+}

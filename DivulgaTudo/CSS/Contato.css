@@ -1,0 +1,20 @@
+#conteudo{
+	margin-top:70px;
+	height:500px;
+	width:100%;
+}
+
+#fcontato{
+	position:relative;
+	width: 50%;
+	float: left;
+	border:3px groove;
+	border-radius:10px;
+}
+
+#contato{
+	padding-left:10px;
+	position:relative;
+	width: 50%;
+	float: left;
+}

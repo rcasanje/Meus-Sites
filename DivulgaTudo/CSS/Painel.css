@@ -1,0 +1,21 @@
+#navbar{
+	margin-top:-20px;
+}
+
+#tudo{
+	margin-top:60;
+}
+
+#registro{
+	border-left:1px #000000;
+	border-left-style:solid;
+}
+
+#rodape{
+	margin-top:10px;
+}
+
+#radioBtn .notActive{
+    color: #3276b1;
+    background-color: #fff;
+}

@@ -1,0 +1,24 @@
+Registro:
+	- Nome*
+	- Apelido*
+	- E-mail*
+	- Senha*
+	- Data de Aniversário*
+	- Sexo*
+	- Link do canal
+	- Status
+	- Último login
+
+Login:
+	- Email
+	- Senha
+
+Recuperar senha:
+	- Email
+
+Informações do Perfil:
+	- Apelido*
+	- Email (privacidade)
+	- Link do canal (privacidade)
+	- Data de aniversário (privacidade)
+	- Último acesso
