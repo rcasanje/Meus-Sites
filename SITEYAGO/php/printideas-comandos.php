@@ -19,7 +19,7 @@ function montarVisualizacaoProduto($caminhoImagem, $nome, $tamanho, $prazo, $qnt
 	</div>';*/
 	
 	$produto .='
-	<div class="col-sm-6 col-md-2">
+	<div class="col-sm-6 col-md-3">
 		<div class="thumbnail">
 			<img src="images/Produtos/default.png" alt="...">
 			<div class="caption">
@@ -28,7 +28,7 @@ function montarVisualizacaoProduto($caminhoImagem, $nome, $tamanho, $prazo, $qnt
 				<span class="info-box-text">Prazo: '. $prazo.' dia</span>
 				<span class="info-box-text">Qntd: '. $qntd.'</span>
 				<span class="info-box-text">Preço: <b>R$ '. $preco.'</b></span>
-				<p><a href="#" class="btn btn-success" role="button">Comprar</a> <a href="#" class="btn btn-primary" role="button">Detalhes</a></p>
+				<p><a href="#" class="btn btn-success" role="button">Comprar</a> <a href="produtos/detalhes.php?codigo=APP5" class="btn btn-primary" role="button">Detalhes</a></p>
 			</div>
 		</div>
 	</div>

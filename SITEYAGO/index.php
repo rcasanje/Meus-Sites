@@ -16,7 +16,7 @@ include("php/printideas-comandos.php");
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="">
 	<div class="wrapper">
 
 		<?php
@@ -61,7 +61,7 @@ include("php/printideas-comandos.php");
 						</div>
 						<div class="row">
 							<?php
-								for($i = 0; $i<=5; $i++){
+								for($i = 0; $i<=3; $i++){
 									echo montarVisualizacaoProduto('images/Produtos/default.png', "Adesivo", "200x200mm", 1, 100, "33.90");
 								}
 							?>

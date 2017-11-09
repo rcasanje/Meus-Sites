@@ -1,5 +1,6 @@
 <?php
-	include("php/comandos.php");
+	$abspath = $_SERVER['HTTP_HOST'].'/SITEYAGO';
+	include("http://localhost/SITEYAGO/php/comandos.php");
 ?>
 
 
@@ -43,13 +44,13 @@
 				</ul>
 			</li> -->
 			<?php
-				foreach(txtToArray("prefabs/barra-de-menu-lateral.txt") as $item){
+				/*foreach(txtToArray("../prefabs/barra-de-menu-lateral.txt") as $item){
 					if($item != ""){
 						printf('
 								<li><a href="#"><i class="fa fa-circle-o"></i><span>%s</span><span class="pull-right-container"</span></a></li>
 					', $item);
 					}
-				}
+				}*/
 			?>
 		</ul>
 	</section>
