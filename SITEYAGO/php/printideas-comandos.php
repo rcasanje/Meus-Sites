@@ -37,5 +37,18 @@ function montarVisualizacaoProduto($caminhoImagem, $nome, $tamanho, $prazo, $qnt
 	return $produto;
 }
 
+function txtToArray($caminho){
+	$array = array();
+
+    $abertura = fopen($caminho, "r");
+
+    $leitura = fread($abertura, filesize($caminho));
+
+    fclose($abertura);
+
+    $array = explode(";", $leitura);
+	
+	return $array;
+}
 
 ?>

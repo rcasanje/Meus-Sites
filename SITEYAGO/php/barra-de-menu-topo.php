@@ -1,5 +1,5 @@
 <header class="main-header">
-	<a href="../../index2.html" class="logo"><span class="logo-mini"><b>P</b> I</span><span class="logo-lg"><b>Print</b> Ideas</span></a>
+	<a href="index.html" class="logo"><span class="logo-mini"><b>P</b> I</span><span class="logo-lg"><b>Print</b> Ideas</span></a>
 	<nav class="navbar navbar-static-top">
 		<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
 			<span class="sr-only">Toggle navigation</span>
@@ -11,7 +11,7 @@
 		<div class="navbar-custom-menu">
 			<ul class="nav navbar-nav">
 				<li class="dropdown notifications-menu">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cart-plus"></i> Carrinho&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-success" style="font-size: 17px;">00</span></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cart-plus"></i> Carrinho&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-success" style="font-size: 17px;" id="carrinhoQntd">00</span></a>
 					<ul class="dropdown-menu">
 						<li class="header">Itens no carrinho: 00</li>
 						<li>

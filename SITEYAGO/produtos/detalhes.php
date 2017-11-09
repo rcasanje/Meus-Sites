@@ -1,5 +1,6 @@
 <?php
 	include("../php/conexoes/user-access.php");
+	include("../php/printideas-comandos.php");
 	$produto = $_GET['codigo'];
 
 	$dados = "SELECT * FROM produtos WHERE codigo_prod='$produto'";
@@ -105,7 +106,7 @@
 										</div>
 									</div>
 									<div class="col-xs-12 col-md-6">
-										<button class="font size-18 btn btn-block btn-success" type="button"><i class="fa fa-cart-plus"></i> Comprar</button>
+										<button class="font size-18 btn btn-block btn-success" type="button" onClick="adicionarCarrinho();"><i class="fa fa-cart-plus"></i> Comprar</button>
 										<br>
 										<div class="font size-18">
 											<p><i class="fa fa-truck"> Calcular frete e prazo<input class="form-control" type="text"></i></p>
@@ -158,31 +159,30 @@
 	<script src="../js/adminlte.min.js"></script>
 	<script src="../js/demo.js"></script>
 	<script>
+		var qntd = 0;
 		$( document ).ready( function () {
 			$( '.sidebar-menu' ).tree()
-		} )
+		} );
+		
+		function adicionarCarrinho(){
+			jQuery.ajax({
+				type: "POST",
+				url: "../php/adicionar-carrinho.php",
+				data: {nome:"teste"},
+				success: function( data )
+				{
+					
+				}
+			});
+			
+			qntd++;
+			
+			if(qntd < 10){
+				document.getElementById('carrinhoQntd').innerHTML = "0"+qntd;	
+			} else{
+				document.getElementById('carrinhoQntd').innerHTML = qntd;
+			}
+		}
 	</script>
 </body>
-
-<!-- <body class="gradiente-lightblue">
-	<header>
-		<?php //include("../php/barra-de-menu-topo.php"); ?>
-	</header>
-	<div class="container-fluid">
-		<div class="solido-white">
-			<h2><?php //echo($info['nome_prod']); ?></h2>
-			<div class="row">
-				<div class="col-md-4">
-					<?php //printf('<img src="../images/Produtos/%s" alt="Imagem produto: %s">', $info['imagem_prod'], $info['nome_prod']); ?>
-				</div>
-				<div class="col-md-4"></div>
-				<div class="col-md-4">
-					<p>Pagar com:</p>
-					<button class="btn btn-success">Pagseguro</button>
-					<button class="btn btn-primary">Paypal</button>
-				</div>
-			</div>
-		</div>
-	</div>
-</body> -->
 </html>
