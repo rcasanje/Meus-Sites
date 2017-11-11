@@ -1,14 +1,24 @@
 <?php
-	include("../php/conexoes/user-access.php");
-	include("../php/printideas-comandos.php");
-	$produto = $_GET['codigo'];
+include("../php/conexoes/user-access.php");
+include("../php/printideas-comandos.php");
+$produto = $_GET['codigo'];
 
-	$dados = "SELECT * FROM produtos WHERE codigo_prod='$produto'";
+$dados = "SELECT * FROM produtos WHERE codigo_prod='$produto'";
 
-	//printf('<div>Página selecionada: %s<br> Dados: %s</div>', $produto, $dados);
-	if($query = mysqli_query($conn, $dados)){
-		$info = mysqli_fetch_array($query, MYSQLI_ASSOC);
-	}
+//printf('<div>Página selecionada: %s<br> Dados: %s</div>', $produto, $dados);
+if($query = mysqli_query($conn, $dados)){
+	$info = mysqli_fetch_array($query, MYSQLI_ASSOC);
+}
+
+if(!isset($_SESSION)) session_start();
+
+if(isset($_SESSION['Produtos']['quantidade'])){
+	$quantidade = $_SESSION['Produtos']['quantidade'];
+	
+} else{
+	$quantidade = 0;
+}
+
 ?>
 <html>
 <head>
@@ -154,35 +164,15 @@
 		<div class="control-sidebar-bg"></div>
 	</div>
 	<script src="../js/jquery.min.js"></script>
+	<script src="../js/printideas-comandos.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../js/fastclick.js"></script>
 	<script src="../js/adminlte.min.js"></script>
 	<script src="../js/demo.js"></script>
 	<script>
-		var qntd = 0;
 		$( document ).ready( function () {
 			$( '.sidebar-menu' ).tree()
 		} );
-		
-		function adicionarCarrinho(){
-			jQuery.ajax({
-				type: "POST",
-				url: "../php/adicionar-carrinho.php",
-				data: {nome:"teste"},
-				success: function( data )
-				{
-					
-				}
-			});
-			
-			qntd++;
-			
-			if(qntd < 10){
-				document.getElementById('carrinhoQntd').innerHTML = "0"+qntd;	
-			} else{
-				document.getElementById('carrinhoQntd').innerHTML = qntd;
-			}
-		}
 	</script>
 </body>
 </html>
