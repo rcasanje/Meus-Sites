@@ -1,3 +1,12 @@
+<?php
+if(!isset($_SESSION)) session_start();
+if(isset($_SESSION['Produtos'])){
+	$quantidade = $_SESSION['Produtos']['quantidade'];
+} else{
+	$quantidade = "0";
+}
+?>
+
 <header class="main-header">
 	<a href="index.html" class="logo"><span class="logo-mini"><b>P</b> I</span><span class="logo-lg"><b>Print</b> Ideas</span></a>
 	<nav class="navbar navbar-static-top">
