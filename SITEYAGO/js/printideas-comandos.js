@@ -5,14 +5,14 @@ function verificarQuantidade(num){
 }
 
 
-function adicionarCarrinho(){
+function adicionarCarrinho(id){
 	aqntd = parseInt(document.getElementById('carrinhoQntd').innerHTML);
 	
 	qntd = aqntd+1;
 	jQuery.ajax({
 		type: "POST",
 		url: "../php/adicionar-carrinho.php",
-		data: {qntd:qntd},
+		data: {qntd:qntd, id:id},
 		success: function( data )
 		{
 			//alert(data);

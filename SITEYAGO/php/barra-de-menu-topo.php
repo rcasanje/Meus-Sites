@@ -1,9 +1,23 @@
 <?php
+$abspath = $_SERVER['REQUEST_URI'];
+
+if(strpos($abspath, "produtos") > -1 || strpos($abspath, "conta") > -1){
+	$abspath = "../";
+} else{
+	$abspath = "";
+}
+
+include($abspath."/php/conexoes/user-access.php");
+
 if(!isset($_SESSION)) session_start();
 if(isset($_SESSION['Produtos'])){
 	$quantidade = $_SESSION['Produtos']['quantidade'];
+	$produtos = $_SESSION['Produtos']['idprodutos'];
 } else{
+	$_SESSION['Produtos']['idprodutos'] = "";
+	$_SESSION['Produtos']['quantidade'] = 0;
 	$quantidade = "0";
+	$produtos = "";
 }
 ?>
 
@@ -25,12 +39,25 @@ if(isset($_SESSION['Produtos'])){
 						<li class="header">Itens no carrinho: <?php echo $quantidade;?></li>
 						<li>
 							<ul class="menu">
-								<li>
+								<?php
+								$ids = substr($produtos, 0, strlen($produtos)-1);
+								$dados = "SELECT * FROM produtos WHERE codigo_prod IN ('$ids')";
+								if($query = mysqli_query($conn, $dados)){
+									while($prod = mysqli_fetch_array($query)){
+										printf('<li>
+											<a href="#"><img src="../images/Produtos/default.png" width="25" height="25"> %s</a>
+										</li>', $prod['nome_prod']);
+									}
+								} else{
+									echo mysqli_error($conn);
+								}
+								?>
+								<!-- <li>
 									<a href="#"><img src="images/Produtos/default.png" width="25" height="25"> Nome do produto gigante para um caraca R$ 9999.99</a>
-								</li>
+								</li> -->
 							</ul>
 						</li>
-						<li class="footer"><a href="#">Visualizar tudo</a><a href="#">Fechar carinho</a></li>
+						<li class="footer"><a href="<?php echo($abspath."carrinho.php"); ?>">Visualizar tudo</a><a href="#">Fechar carinho</a></li>
 					</ul>
 				</li>
 				<li class="dropdown user user-menu">

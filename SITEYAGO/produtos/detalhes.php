@@ -95,7 +95,7 @@ if(isset($_SESSION['Produtos']['quantidade'])){
 								</div>
 							</div>
 							<div class="col-xs-12 col-md-6">
-								<label class="font size-18">Rafael Casanje Bertolino da Costa</label>
+								<label class="font size-18">ADESIVO VINIL BRANCO BOBINA M/2 - 120g - 460X100MM - 4X0</label>
 								<hr>
 								<label class="font size-18" style="color: green"><i class="fa fa-check"></i> PRODUTO DISPON&Iacute;VEL</label>
 								<hr>
@@ -116,7 +116,7 @@ if(isset($_SESSION['Produtos']['quantidade'])){
 										</div>
 									</div>
 									<div class="col-xs-12 col-md-6">
-										<button class="font size-18 btn btn-block btn-success" type="button" onClick="adicionarCarrinho();"><i class="fa fa-cart-plus"></i> Comprar</button>
+										<button class="font size-18 btn btn-block btn-success" type="button" onClick="adicionarCarrinho('<?php echo($info['codigo_prod']); ?>');"><i class="fa fa-cart-plus"></i> Comprar</button>
 										<br>
 										<div class="font size-18">
 											<p><i class="fa fa-truck"> Calcular frete e prazo<input class="form-control" type="text"></i></p>
@@ -129,7 +129,12 @@ if(isset($_SESSION['Produtos']['quantidade'])){
 					<div class="box-footer">
 						<div id="especs">
 							<label style="color: red">ESPECIFICAÇÕES</label>
-							<p>Marca<br>Modelo<br>Tipo de impressao<br>Tamanho<br>Tipo do Papel</p>
+							<p id="productID">ID: <?php echo($info['codigo_prod']); ?>	</p>
+							<p class="margin-10">Marca</p>
+							<p class="margin-10">Modelo</p>
+							<p class="margin-10">Tipo de impressao</p>
+							<p class="margin-10">Tamanho</p>
+							<p class="margin-10">Tipo do Papel</p>
 						</div>
 					</div>
 				</div>

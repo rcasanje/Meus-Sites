@@ -1,11 +1,5 @@
 <?php
-	$abspath = $_SERVER['REQUEST_URI'];
-
-	if(strpos($abspath, "produtos") > -1 || strpos($abspath, "conta") > -1){
-		$abspath = "../";
-	} else{
-		$abspath = "";
-	}
+	
 ?>
 
 
