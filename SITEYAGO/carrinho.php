@@ -2,6 +2,20 @@
 include('php/comandos.php');
 header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
+
+if(!isset($_SESSION)) session_start();
+if(isset($_SESSION['Produtos'])){
+	$quantidade = $_SESSION['Produtos']['quantidade'];
+	$produtos = $_SESSION['Produtos']['idprodutos'];
+	$qntdprodut = array();
+	$idprodut = array();
+} else{
+	$_SESSION['Produtos']['idprodutos'] = "";
+	$_SESSION['Produtos']['quantidade'] = 0;
+	$qntdprodut = array();
+	$quantidade = "0";
+	$produtos = "";
+}
 ?>
 
 <html>
@@ -11,6 +25,8 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 	<title>Carrinho | Print Ideas</title>
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/custom.css">
+	<link rel="stylesheet" href="css/dataTables.css">
 	<link rel="stylesheet" href="css/font-awesome.css">
 	<link rel="stylesheet" href="css/ionicons.css">
 	<link rel="stylesheet" href="css/AdminLTE.css">
@@ -21,8 +37,10 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
-		<?php include("php/barra-de-menu-topo.php"); ?>
-		<?php include("php/barra-de-menu-lateral.php"); ?>
+		<?php 
+			include("php/barra-de-menu-topo.php");
+			include("php/barra-de-menu-lateral.php");
+		?>
 		<div class="content-wrapper">
 			<section class="content-header">
 				<h1>Print Ideas<small>tirando suas ideias do papel</small></h1>
@@ -34,7 +52,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 				<form id="fecharCarrinho" action="php/gerarCompra.php" method="post">
 					<input type="text" name="currency" value="BRL" readonly hidden>
 
-					<table class="table">
+					<table id="itensCarrinho" class="display" cellspacing="0" width="100%">
 						<thead>
 							<tr>
 								<th># item</th>
@@ -44,18 +62,63 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 							</tr>
 						</thead>
 						<tbody>
-							<tr scope="row">
-								<th><input class="inputTransparente" type="text" name="itemId1" value="A3CP" readonly></th>
-								<th><input class="inputTransparente" type="text" name="itemDescription1" value="Adesivo trelele" readonly></th>
-								<th><label>R$ 39.90 / </label><input class="inputTransparente" type="number" name="itemAmount1" value="39.90" readonly></th>
-								<th>Qntd: <input class="inputTransparente" type="number" name="itemQuantity1" value="1" width="10px"> | Excluir</th>
-							</tr>
-							<tr scope="row">
-								<th><input class="inputTransparente" type="text" name="itemId2" value="A3CP3" readonly></th>
-								<th><input class="inputTransparente" type="text" name="itemDescription2" value="Adesivo trelele3" readonly></th>
-								<th><label>R$ 39.90 / </label><input class="inputTransparente" type="number" name="itemAmount2" value="339.90" readonly></th>
-								<th>Qntd: <input class="inputTransparente" type="number" name="itemQuantity2" value="1" width="10px"> | Excluir</th>
-							</tr>
+							<?php
+								$idQuery = "";
+								$index = 1;
+								$posPast = 0;
+								$posSearch = 0;
+								
+								$saveProduct = $produtos;
+								printf("Produtos Salvos: %s<br>", $saveProduct);
+																
+								while($saveProduct != ""){
+									$posSearch = strpos($saveProduct, ",");
+									$getID = substr($saveProduct, 0, $posSearch);
+									$setID = substr($getID, 0, -3);
+									$setQntd = substr($getID, strlen($getID)-2, -1);
+									
+									if($idQuery == ""){
+										$idQuery .= "'".$setID."'";
+									} else {
+										$idQuery .= ", '".$setID."'";
+									}
+									
+									$idprodut[$index] = $setID;
+									$qntdprodut[$index] = $setQntd;
+									
+									printf("Edição: %s<br>", $saveProduct);
+									$saveProduct = substr($saveProduct, $posSearch+1, strlen($saveProduct));
+									
+									$index++;
+								}
+								
+								$dados = "SELECT * FROM produtos WHERE codigo_prod IN ($idQuery)";
+								printf("Dados: %s<br>", $dados);
+								
+								if($query = mysqli_query($conn, $dados)){
+									$index = 1;
+									
+									while($prod = mysqli_fetch_array($query)){
+										$precoUn = substr($prod['preco_prod'], 2);
+										$precoTotal = $precoUn*$qntdprodut[$index];
+										echo "Preco: ".$precoUn;
+										printf('<tr scope="row">');
+											printf('<td>
+												<input class="inputTransparente" type="text" name="itemId%s" value="%s" readonly>
+											</td>', $index, $idprodut[$index]);
+											printf('<td><input class="inputTransparente" type="text" name="itemDescription%s" value="%s" readonly></td>', $index, $prod['nome_prod']);
+											printf('<td>
+														<label id="precoun%s">R$ %s / </label>
+														<input class="inputTransparente" type="text" id="itemAmount%s" name="itemAmount%s" value="%s" readonly>
+													</td>', $index, $precoUn, $index, $index, number_format($precoTotal, 2));
+											printf('<td>Qntd: <input class="inputTransparente" type="number" id="itemQuantity%s" name="itemQuantity%s" value="1" width="10px" onChange="atualizarPreco(%s);"> | Excluir</td>', $index, $index, $index);
+										printf('</tr>');
+										$index++;
+									}
+								} else{
+									echo mysqli_error($conn);
+								}
+								?>
 						</tbody>
 					</table>			
 					<div align="left">
@@ -66,24 +129,32 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 		</div>
 	</div>
 </body>
-<script>
-	/*jQuery('#fecharCarrinho').submit(function(e){
-		e.preventDefault();
-		var dados = $( "fecharCarrinho" ).serialize();
-		$.ajax({
-        	type: "POST",
-			contentType: "application/xml; charset=ISO-8859-1",
-            url: "https://ws.sandbox.pagseguro.uol.com.br/v2/checkout",
-			contentType: 'text/plain',
-			xhrFields: {
-				withCredentials: false
-			},
-            success: function (data){
-            	document.getElementById('ajaxProdutos').innerHTML = data;
-            }
-        })
-	});*/
-</script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/printideas-comandos.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/dataTables.min.js"></script>
+	<script src="js/fastclick.js"></script>
+	<script src="js/adminlte.min.js"></script>
+	<script src="js/demo.js"></script>
+	<script>
+		$( document ).ready( function () {
+			$( '.sidebar-menu' ).tree()
+		} )
+		
+		$(document).ready(function(){
+			$('#itensCarrinho').DataTable();
+		});
+		
+		function atualizarPreco(num){
+			var valor = document.getElementById('precoun' + num).innerHTML;
+			var valortotal = document.getElementById('itemAmount' + num);
+			var quantidade = document.getElementById('itemQuantity' + num).value;
+			
+			valor = valor.substr(3, valor.length-6)
+			
+			valortotal.value = parseFloat((parseFloat(valor)*parseInt(quantidade)).toFixed(3));
+		}
+	</script>
 </html>
 
 

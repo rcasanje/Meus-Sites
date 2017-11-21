@@ -1,9 +1,25 @@
 <?php
 function txtToArray($caminho, $separador = ";"){
-	$linha = "";
+	$array = array();
+    $abertura = fopen($caminho, "r");
+    $leitura = fread($abertura, filesize($caminho));
+    fclose($abertura);
+    $array = explode(";", $leitura);
 	
-	$linha = explode($separador, file_get_contents($caminho));
+	return $array;
+}
+
+function arrayToString($array){
+	$data = "Somthing went wrong. Contact the administradtor";
+	if(is_array($array)){
+		$data = "Array passing to foreach";
+		foreach($array as $key => $value){
+			$data .= "ID ".$key.". Value: ".$value;
+		}
+	} else{
+		$data = "The variable you passing isn't a array";
+	}
 	
-	return $linha;
+	return $data;
 }
 ?>

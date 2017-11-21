@@ -1,10 +1,10 @@
 <?php
-$url = 'https://ws.sandbox.pagseguro.uol.com.br/v2/checkout';
+$url = 'https://ws.pagseguro.uol.com.br/v2/checkout';
 
-//$data['email'] = 'minhaideiaimpressa@gmail.com';
-//$data['token'] = '137A896E54C9481B9936C5654CAE616D';
-$data['email'] = 'rafael.casanje@gmail.com';
-$data['token'] = '60A594AC4E0544A299CEDBF1F918A5AB';
+$data['email'] = 'minhaideiaimpressa@gmail.com';
+$data['token'] = '333AA1F752AE4B2B9564C03279D9E6A4';
+//$data['email'] = 'rafael.casanje@gmail.com';
+//$data['token'] = '60A594AC4E0544A299CEDBF1F918A5AB';
 $data['currency'] = 'BRL';
 
 $itemlimite = 1000000;
@@ -35,7 +35,7 @@ $data['shippingAddressPostalCode'] = '01452002';
 $data['shippingAddressCity'] = 'Sao Paulo';
 $data['shippingAddressState'] = 'SP';
 $data['shippingAddressCountry'] = 'BRA';
-$data['redirectURL'] = 'http://www.sounoob.com.br/paginaDeAgracedimento';
+$data['redirectURL'] = 'index.php';
 
 $data = http_build_query($data);
 
@@ -51,7 +51,7 @@ $xml= curl_exec($curl);
 //echo $xml;
 
 $xml= simplexml_load_string($xml);
-$urlpayment = 'https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code='.$xml -> code;
+$urlpayment = 'https://pagseguro.uol.com.br/v2/checkout/payment.html?code='.$xml -> code;
 echo "<br>".$urlpayment;
 header('Location:'.$urlpayment);
 ?>

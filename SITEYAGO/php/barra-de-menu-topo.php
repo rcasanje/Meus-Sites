@@ -13,9 +13,12 @@ if(!isset($_SESSION)) session_start();
 if(isset($_SESSION['Produtos'])){
 	$quantidade = $_SESSION['Produtos']['quantidade'];
 	$produtos = $_SESSION['Produtos']['idprodutos'];
+	$qntdprodut = array();
+	$idprodut = array();
 } else{
 	$_SESSION['Produtos']['idprodutos'] = "";
 	$_SESSION['Produtos']['quantidade'] = 0;
+	$qntdprodut = array();
 	$quantidade = "0";
 	$produtos = "";
 }
@@ -35,18 +38,50 @@ if(isset($_SESSION['Produtos'])){
 			<ul class="nav navbar-nav">
 				<li class="dropdown notifications-menu">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cart-plus"></i> Carrinho&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-success" style="font-size: 17px;" id="carrinhoQntd"><?php echo $quantidade;?></span></a>
-					<ul class="dropdown-menu">
+					<ul class="dropdown-menu" style="width: 450%;">
 						<li class="header">Itens no carrinho: <?php echo $quantidade;?></li>
 						<li>
 							<ul class="menu">
 								<?php
-								$ids = substr($produtos, 0, strlen($produtos)-1);
-								$dados = "SELECT * FROM produtos WHERE codigo_prod IN ('$ids')";
+								$idQuery = "";
+								$index = 1;
+								$posPast = 0;
+								$posSearch = 0;
+								
+								$saveProduct = $produtos;
+								printf("Produtos Salvos: %s<br>", $saveProduct);
+																
+								while($saveProduct != ""){
+									$posSearch = strpos($saveProduct, ",");
+									$getID = substr($saveProduct, 0, $posSearch);
+									$setID = substr($getID, 0, -3);
+									$setQntd = substr($getID, strlen($getID)-2, -1);
+									
+									if($idQuery == ""){
+										$idQuery .= "'".$setID."'";
+									} else {
+										$idQuery .= ", '".$setID."'";
+									}
+									
+									$idprodut[$index] = $setID;
+									$qntdprodut[$index] = $setQntd;
+									
+									printf("Edição: %s<br>", $saveProduct);
+									$saveProduct = substr($saveProduct, $posSearch+1, strlen($saveProduct));
+									
+									$index++;
+								}
+								
+								$dados = "SELECT * FROM produtos WHERE codigo_prod IN ($idQuery)";
+								printf("Dados: %s<br>", $dados);
+								
 								if($query = mysqli_query($conn, $dados)){
+									$index = 1;
 									while($prod = mysqli_fetch_array($query)){
 										printf('<li>
-											<a href="#"><img src="../images/Produtos/default.png" width="25" height="25"> %s</a>
-										</li>', $prod['nome_prod']);
+											<a href="#"><img src="../images/Produtos/default.png" width="25" height="25"> %s || Qntd: %s</a>
+										</li>', $prod['nome_prod'], $qntdprodut[$index]);
+										$index++;
 									}
 								} else{
 									echo mysqli_error($conn);

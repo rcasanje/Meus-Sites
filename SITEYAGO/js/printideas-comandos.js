@@ -15,7 +15,7 @@ function adicionarCarrinho(id){
 		data: {qntd:qntd, id:id},
 		success: function( data )
 		{
-			//alert(data);
+			alert(data);
 		}
 	});
 

@@ -1,6 +1,7 @@
 <?php
 include("../php/conexoes/user-access.php");
 include("../php/printideas-comandos.php");
+include("../php/comandos.php");
 $produto = $_GET['codigo'];
 
 $dados = "SELECT * FROM produtos WHERE codigo_prod='$produto'";

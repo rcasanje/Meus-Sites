@@ -1,5 +1,6 @@
 <?php
 include("php/printideas-comandos.php");
+include("php/comandos.php");
 ?>
 <html>
 
@@ -62,7 +63,7 @@ include("php/printideas-comandos.php");
 						<div class="row">
 							<?php
 								for($i = 0; $i<=3; $i++){
-									echo montarVisualizacaoProduto('images/Produtos/default.png', "Adesivo", "200x200mm", 1, 100, "33.90");
+									echo montarVisualizacaoProduto('images/Produtos/default.png', "ADESIVO VINIL BRANCO BOBINA M/2 - 120g - 4X0", "460X100mm", 1, 5, "25,00");
 								}
 							?>
 						</div>
