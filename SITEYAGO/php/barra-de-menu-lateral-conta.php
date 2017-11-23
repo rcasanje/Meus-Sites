@@ -1,30 +1,56 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-Lateral" aria-controls="navbar-Lateral" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+<?php
+	
+?>
 
-	<div class="collapse navbar-collapse" id="navbar-Lateral">
-		<div>
-			<ul class="nav flex-column">
-				<li class="nav-item"><a class="nav-link" data-toggle="collapse" href="#collapseDados" aria-expanded="false" aria-controls="collapseDados">Dados Pessoais</a></li>
-				<div class="collapse" id="collapseDados">
-					<div class="card card-body">
-						<li class="nav-item" id="dadosCadastro"><a href="javascript:void(0)" onClick="carregarAjax(0);">Dados cadastrais</a></li>
-						<li class="nav-item" id="dadosEntrega"><a href="javascript:void(0)" onClick="carregarAjax(1);">Dados de entrega</a></li>
-					</div>
+
+<aside class="main-sidebar">
+	<section class="sidebar">
+		<div class="user-panel">
+			<div class="pull-left image">
+				<img src="images/Produtos/default.png" class="img-circle" alt="User Image">
+			</div>
+			<div class="pull-left info">
+				<p>Rafael Casanje</p>
+				<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+			</div>
+			<br>
+			<br>
+			<form action="#" method="get" class="sidebar-form">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control" placeholder="Search...">
+					<span class="input-group-btn"><button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button></span>
 				</div>
-				
-				<li class="nav-item"><a class="nav-link" data-toggle="collapse" href="#collapsePedidos" aria-expanded="false" aria-controls="collapsePedidos">Pedidos</a></li>
-				<div class="collapse" id="collapsePedidos">
-					<div class="card card-body">
-						<li class="nav-item"><a href="javascript:void(0)" onClick="carregarAjax(2);">Pedidos feitos</a></li>
-						<li class="nav-item"><a href="javascript:void(0)" onClick="carregarAjax(3);">Listas de desejo</a></li>
-						<li class="nav-item"><a href="javascript:void(0)" onClick="carregarAjax(4);">Trocas devoluções</a></li>
-					</div>
-				</div>
-			</ul>
+			</form>
 		</div>
-	</div>
-</nav>
-
-
-<style>
-</style>
+		<ul class="sidebar-menu" data-widget="tree">
+			<li class="header">PRINT IDEAS</li>
+			<li><a href="<?=$abspath;?>index.php"><i class="fa fa-home"></i><span>Inicio</span><span class="pull-right-container"</span></a></li>
+			<li><a href="<?=$abspath;?>about.php"><i class="fa fa-info"></i><span>Quem somos</span><span class="pull-right-container"</span></a></li>
+			<li><a href="<?=$abspath;?>contact.php"><i class="fa fa-comments"></i><span>Contatos</span><span class="pull-right-container"</span></a></li>
+			<li class="header">PERSONALIZADOS</li>
+			<li><a href="<?=$abspath;?>#"><i class="fa fa-briefcase"></i><span>Para empresas</span><span class="pull-right-container"</span></a></li>
+			<li><a href="<?=$abspath;?>#"><i class="fa fa-magic"></i><span>Para festas</span><span class="pull-right-container"></span></a></li>
+			<li><a href="<?=$abspath;?>#"><i class="fa fa-home"></i><span>Para sua casa</span><span class="pull-right-container"></span></a></li>
+			<li><a href="<?=$abspath;?>#"><i class="fa fa-cubes"></i><span>Cenários 3D</span><span class="pull-right-container"></span></a></li>
+			<li class="header">PRODUTOS</li>
+			<!-- <li class="treeview">
+				<a href="#"><i class="fa fa-files-o"></i><span>Layout Options</span><span class="pull-right-container"><span class="label label-primary pull-right">4</span></span></a>
+				<ul class="treeview-menu">
+					<li><a href="../layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
+					<li><a href="../layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
+					<li><a href="../layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
+					<li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
+				</ul>
+			</li> -->
+			<?php
+				foreach(txtToArray($abspath."prefabs/barra-de-menu-lateral.txt") as $item){
+					if($item != ""){
+						printf('
+								<li><a href="#"><i class="fa fa-circle-o"></i><span>%s</span><span class="pull-right-container"</span></a></li>
+					', $item);
+					}
+				}
+			?>
+		</ul>
+	</section>
+</aside>

@@ -25,8 +25,8 @@
 		<ul class="sidebar-menu" data-widget="tree">
 			<li class="header">PRINT IDEAS</li>
 			<li><a href="<?=$abspath;?>index.php"><i class="fa fa-home"></i><span>Inicio</span><span class="pull-right-container"</span></a></li>
-			<li><a href="<?=$abspath;?>#"><i class="fa fa-info"></i><span>Quem somos</span><span class="pull-right-container"</span></a></li>
-			<li><a href="<?=$abspath;?>#"><i class="fa fa-comments"></i><span>Contatos</span><span class="pull-right-container"</span></a></li>
+			<li><a href="<?=$abspath;?>about.php"><i class="fa fa-info"></i><span>Quem somos</span><span class="pull-right-container"</span></a></li>
+			<li><a href="<?=$abspath;?>contact.php"><i class="fa fa-comments"></i><span>Contatos</span><span class="pull-right-container"</span></a></li>
 			<li class="header">PERSONALIZADOS</li>
 			<li><a href="<?=$abspath;?>#"><i class="fa fa-briefcase"></i><span>Para empresas</span><span class="pull-right-container"</span></a></li>
 			<li><a href="<?=$abspath;?>#"><i class="fa fa-magic"></i><span>Para festas</span><span class="pull-right-container"></span></a></li>
