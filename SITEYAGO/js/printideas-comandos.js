@@ -7,13 +7,13 @@ function verificarQuantidade(num){
 }
 
 
-function adicionarCarrinho(id){
+function adicionarCarrinho(id, path){
 	aqntd = parseInt(document.getElementById('carrinhoQntd').innerHTML);
 	
 	qntd = aqntd+1;
 	jQuery.ajax({
 		type: "POST",
-		url: "../php/adicionar-carrinho.php",
+		url: path + "php/carrinho-adicionar.php",
 		data: {qntd:qntd, id:id},
 		success: function( data )
 		{
@@ -22,6 +22,25 @@ function adicionarCarrinho(id){
 	});
 
 	document.getElementById('carrinhoQntd').innerHTML = qntd;
+}
+
+function removerCarrinho(id){
+	var aqntd = parseInt(document.getElementById('carrinhoQntd').innerHTML);
+	
+	qntd = aqntd-1;
+	
+	jQuery.ajax({
+		type: "POST",
+		url: "php/carrinho-adicionar.php",
+		data: {qntd:qntd, id:id},
+		success: function( data )
+		{
+			alert(data);
+			window.location.reload();
+		}
+	});
+	
+	document.getElementById('carrinhoQntd').innerHTML = qntd - 1;
 }
 
 function habilitarEnvio(){
@@ -53,12 +72,12 @@ function verificarSenha(){
 
 function verificarEmail(){
 	var email = document.getElementById('email');
-	var cemail = document.getElementById('cemail')
+	var cemail = document.getElementById('cemail');
 	
 	if(email.value != cemail.value){
 		email.style.borderColor = "red";
 		cemail.style.borderColor = "red";
-		confirmaEmail = false
+		confirmaEmail = false;
 	} else{
 		email.style.borderColor = "green";
 		cemail.style.borderColor = "green";

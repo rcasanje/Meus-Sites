@@ -1,8 +1,10 @@
 <?php
-	
+if(isset($_SESSION['User']['ID'])){
+	$nomeConta = $_SESSION['User']['ID'];	
+} else{
+	$nomeConta = "Cliente";
+}
 ?>
-
-
 <aside class="main-sidebar">
 	<section class="sidebar">
 		<div class="user-panel">
@@ -10,8 +12,7 @@
 				<img src="images/Produtos/default.png" class="img-circle" alt="User Image">
 			</div>
 			<div class="pull-left info">
-				<p>Rafael Casanje</p>
-				<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+				<p><?=$nomeConta;?></p>
 			</div>
 			<br>
 			<br>
@@ -27,12 +28,11 @@
 			<li><a href="<?=$abspath;?>index.php"><i class="fa fa-home"></i><span>Inicio</span><span class="pull-right-container"</span></a></li>
 			<li><a href="<?=$abspath;?>about.php"><i class="fa fa-info"></i><span>Quem somos</span><span class="pull-right-container"</span></a></li>
 			<li><a href="<?=$abspath;?>contact.php"><i class="fa fa-comments"></i><span>Contatos</span><span class="pull-right-container"</span></a></li>
-			<li class="header">PERSONALIZADOS</li>
-			<li><a href="<?=$abspath;?>#"><i class="fa fa-briefcase"></i><span>Para empresas</span><span class="pull-right-container"</span></a></li>
-			<li><a href="<?=$abspath;?>#"><i class="fa fa-magic"></i><span>Para festas</span><span class="pull-right-container"></span></a></li>
-			<li><a href="<?=$abspath;?>#"><i class="fa fa-home"></i><span>Para sua casa</span><span class="pull-right-container"></span></a></li>
-			<li><a href="<?=$abspath;?>#"><i class="fa fa-cubes"></i><span>Cenários 3D</span><span class="pull-right-container"></span></a></li>
-			<li class="header">PRODUTOS</li>
+			<li class="header">CONTA</li>
+			<li><a href="javascript:void(0)" onClick="carregarAjax(0);"><i class="fa fa-home"></i><span>Dados</span><span class="pull-right-container"</span></a></li>
+			<li><a href="javascript:void(0)" onClick="carregarAjax(1);"><i class="fa fa-info"></i><span>Endereço</span><span class="pull-right-container"</span></a></li>
+			<li><a href="javascript:void(0)" onClick="carregarAjax(2);"><i class="fa fa-briefcase"></i><span>Devolução</span><span class="pull-right-container"</span></a></li>
+			<li><a href="javascript:void(0)" onClick="carregarAjax(3);"><i class="fa fa-comments"></i><span>Lista de Desejo</span><span class="pull-right-container"</span></a></li>
 			<!-- <li class="treeview">
 				<a href="#"><i class="fa fa-files-o"></i><span>Layout Options</span><span class="pull-right-container"><span class="label label-primary pull-right">4</span></span></a>
 				<ul class="treeview-menu">
@@ -42,15 +42,6 @@
 					<li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
 				</ul>
 			</li> -->
-			<?php
-				foreach(txtToArray($abspath."prefabs/barra-de-menu-lateral.txt") as $item){
-					if($item != ""){
-						printf('
-								<li><a href="#"><i class="fa fa-circle-o"></i><span>%s</span><span class="pull-right-container"</span></a></li>
-					', $item);
-					}
-				}
-			?>
 		</ul>
 	</section>
 </aside>

@@ -3,7 +3,7 @@ if(!isset($_SESSION)) session_start();
 
 $abspath = $_SERVER['REQUEST_URI'];
 
-if(strpos($abspath, "produtos") > -1 || strpos($abspath, "conta") > -1){
+if(strpos($abspath, "produtos") > -1 || strpos($abspath, "personalizado") > -1 || strstr($abspath, "perfil") > -1){
 	$abspath = "../";
 } else{
 	$abspath = "";
@@ -11,13 +11,7 @@ if(strpos($abspath, "produtos") > -1 || strpos($abspath, "conta") > -1){
 
 include($abspath."/php/conexoes/user-access.php");
 
-if(isset($_SESSION['Cliente']) && $_SESSION['Cliente']['nomeusuario'] != null){
-	$nomeusuario = $_SESSION['Cliente']['nomeusuario'];
-} else{
-	$_SESSION['Cliente']['nomeusuario'] = null;
-	
-	$nomeusuario = "Faça login";
-}
+if(!isset($_SESSION)) session_start();
 
 if(isset($_SESSION['Produtos'])){
 	$quantidade = $_SESSION['Produtos']['quantidade'];
@@ -31,10 +25,19 @@ if(isset($_SESSION['Produtos'])){
 	$quantidade = "0";
 	$produtos = "";
 }
+
+if(isset($_SESSION['User']['ID'])){
+	$nomeCliente = $_SESSION['User']['ID'];	
+} else{
+	$nomeCliente = "Cliente";
+}
 ?>
 
 <header class="main-header">
-	<a href="index.php" class="logo"><span class="logo-mini"><b>P</b> I</span><span class="logo-lg"><b>Print</b> Ideas</span></a>
+	<a href="index.php" class="logo">
+		<span class="logo-mini"><b>P</b> I</span>
+		<span class="logo-lg"><b>Print</b> Ideas</span>
+	</a>
 	<nav class="navbar navbar-static-top">
 		<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
 			<span class="sr-only">Toggle navigation</span>
@@ -46,10 +49,11 @@ if(isset($_SESSION['Produtos'])){
 		<div class="navbar-custom-menu">
 			<ul class="nav navbar-nav">
 				<?php
-					if($nomeusuario == "Faça login"){
+					
+					if($nomeCliente == "Cliente"){
 						printf('<li>
-									<a href="%s">Registrar / Log In</a>
-								</li>', $abspath."acesso.php");
+									<a href="%s">Registrar / Log In %s</a>
+								</li>', $abspath."acesso.php", strpos($abspath, "conta"));
 					}
 				?>
 				
@@ -66,7 +70,7 @@ if(isset($_SESSION['Produtos'])){
 								$posSearch = 0;
 								
 								$saveProduct = $produtos;
-								//printf("Produtos Salvos: %s<br>", $saveProduct);
+								printf("Produtos Salvos: %s<br>", $saveProduct);
 																
 								while($saveProduct != ""){
 									$posSearch = strpos($saveProduct, ",");
@@ -97,8 +101,9 @@ if(isset($_SESSION['Produtos'])){
 										$index = 1;
 										while($prod = mysqli_fetch_array($query)){
 											printf('<li>
-												<a href="#"><img src="../images/Produtos/default.png" width="25" height="25"> %s || Qntd: %s</a>
-											</li>', $prod['nome_prod'], $qntdprodut[$index]);
+												<a href="%sprodutos/detalhes.php?codigo=%s"><img src="%simages/Produtos/default.png" width="25" height="25"> %s || Qntd: %s</a>
+											</li>', $abspath, $idprodut[$index],$abspath, $prod['nome_prod'], $qntdprodut[$index]);
+											
 											$index++;
 										}
 									} else{
@@ -111,15 +116,15 @@ if(isset($_SESSION['Produtos'])){
 								</li> -->
 							</ul>
 						</li>						
-						<li class="footer"><a href="<?php echo($abspath."carrinho.php"); ?>">Visualizar tudo</a><a href="#">Fechar carinho</a></li>
+						<li class="footer"><a href="<?php echo($abspath."carrinho.php"); ?>">Visualizar tudo ou fechar carrinho</a></li>
 					</ul>
 				</li>
 				<li class="dropdown user user-menu">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="hidden-xs"><?php echo $nomeusuario ?></span></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="hidden-xs"><?=$nomeCliente; ?></span></a>
 					<ul class="dropdown-menu">
 						<li class="user-header"> 
 							<img src="<?php echo($abspath."images/Produtos/default.png"); ?>" class="img-circle" alt="User Image">
-							<p><?php echo $nomeusuario ?></p>
+							<p><?=$nomeCliente; ?></p>
 						</li>
 						<li class="user-body">
 							<div class="row">

@@ -1,6 +1,8 @@
 <?php
 include("php/printideas-comandos.php");
 include("php/comandos.php");
+
+if(isset($_SESSION)) session_start();
 ?>
 <html>
 
@@ -38,22 +40,36 @@ include("php/comandos.php");
 			<section class="content">
 				<div class="row">
 					<div class="col-xs-12 col-md-6">
-						<form>
+						<form action="php/user-login.php" method="post">
 							<div class="box box-info">
 								<div class="box-header with-border">
 									<h3 class="box-title">Login</h3>
+										<div>
+										<?php
+											if(isset($_SESSION['Erro']['login'])){
+												if($_SESSION['Erro']['login'] != ""){
+													printf('<br>
+													<div class="alert alert-warning alert-dismissible">
+														<h4><i class="icon fa fa-warning"></i> Alerta!</h4>
+														<b>%s</b>
+													</div>', $_SESSION['Erro']['login']); 
+													$_SESSION['Erro']['login'] = "";
+												}
+											}
+										?>
+										</div>
 								</div>
 								<div class="box-body">
 									<div class="input-group">
 										<span class="input-group-addon"><i class="fa fa-user"></i></span>
-										<input type="text" class="form-control" placeholder="Apelido">
+										<input type="text" class="form-control" name="apelido" placeholder="Apelido">
 									</div>
 									<div class="input-group">
 										<span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
-										<input type="password" class="form-control" placeholder="Senha">
+										<input type="password" class="form-control" name="senha" placeholder="Senha">
 									</div>
 									<div class="checkbox">
-										<label><input type="checkbox" disabled>Permanecer online</label>
+										<label><input type="checkbox" name="" disabled>Permanecer online</label>
 									</div>
 								</div>
 								<div class="box-footer with-border">
@@ -74,31 +90,31 @@ include("php/comandos.php");
 										<div class="col-md-12">
 											<div class="input-group">
 												<span class="input-group-addon"><i class="fa fa-user"></i></span>
-												<input type="text" class="form-control" placeholder="Apelido" name="apelido">
+												<input type="text" class="form-control" placeholder="Apelido" name="apelido" required>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="input-group">
 												<span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
-												<input id="senha" type="password" class="form-control" placeholder="Senha" name="senha" onInput="verificarSenha();">
+												<input id="senha" type="password" class="form-control" placeholder="Senha" name="senha" onInput="verificarSenha();" required>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="input-group">
 												<span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
-												<input id="csenha" type="password" class="form-control" placeholder="Confirma Senha" name="csenha" onInput="verificarSenha();">
+												<input id="csenha" type="password" class="form-control" placeholder="Confirma Senha" name="csenha" onInput="verificarSenha();" required>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="input-group">
 												<span class="input-group-addon"><i class="fa fa-at"></i></span>
-												<input id="email" type="email" class="form-control" placeholder="Email" name="email" onInput="verificarEmail();">
+												<input id="email" type="email" class="form-control" placeholder="Email" name="email" onInput="verificarEmail();" required>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="input-group">
 												<span class="input-group-addon"><i class="fa fa-at"></i></span>
-												<input id="cemail" type="email" class="form-control" placeholder="Confirma Email" name="cemail" onInput="verificarEmail();">
+												<input id="cemail" type="email" class="form-control" placeholder="Confirma Email" name="cemail" onInput="verificarEmail();" required>
 											</div>
 										</div>
 									</div>
@@ -108,31 +124,31 @@ include("php/comandos.php");
 										<div class="col-md-12">
 											<div class="input-group">
 												<span class="input-group-addon">Nome</span>
-												<input type="text" class="form-control" placeholder="Nome completo" name="nomecompleto">
+												<input type="text" class="form-control" placeholder="Nome completo" name="nomecompleto" required>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="input-group">
 												<span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
-												<input type="email" class="form-control" placeholder="CPF" name="cpf">
+												<input type="text" class="form-control" placeholder="CPF" name="cpf" required>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="input-group">
 												<span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
-												<input type="email" class="form-control" placeholder="RG" name="rg">
+												<input type="text" class="form-control" placeholder="RG" name="rg" required>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="input-group">
 												<span class="input-group-addon">Nascimento</span>
-												<input type="date" class="form-control" name="datanascimento">
+												<input type="date" class="form-control" name="datanascimento" required>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="input-group">
 												<span class="input-group-addon"><i class="fa fa-genderless"></i></span>
-												<select class="form-control" name="genero">
+												<select class="form-control" name="genero" required>
 													<option>Selecione seu sexo</option>
 													<option value="0">Masculino</option>
 													<option value="1">Feminino</option>
@@ -142,13 +158,13 @@ include("php/comandos.php");
 										<div class="col-md-6">
 											<div class="input-group">
 												<span class="input-group-addon">Telefone</span>
-												<input type="text" class="form-control" placeholder="Telefone" name="telefone">
+												<input type="text" class="form-control" placeholder="XX XXXXXXXX" name="telefone" required>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="input-group">
 												<span class="input-group-addon">Celular</span>
-												<input type="text" class="form-control" placeholder="Celular" name="celular">
+												<input type="text" class="form-control" placeholder="XX XXXXXXXXX" name="celular">
 											</div>
 										</div>
 									</div>
@@ -158,37 +174,55 @@ include("php/comandos.php");
 										<div class="col-md-6">
 											<div class="input-group">
 												<span class="input-group-addon"><i class="fa fa-truck"></i></span>
-												<input type="text" class="form-control" placeholder="Estado" name="estado">
+												<input type="text" class="form-control" placeholder="Estado" name="estado" required>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="input-group">
 												<span class="input-group-addon"><i class="fa fa-truck"></i></span>
-												<input type="text" class="form-control" placeholder="Município" name="municipio">
+												<input type="text" class="form-control" placeholder="Município" name="municipio" required>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="input-group">
 												<span class="input-group-addon"><i class="fa fa-truck"></i></span>
-												<input type="text" class="form-control" placeholder="Bairro" name="bairro">
+												<input type="text" class="form-control" placeholder="Bairro" name="bairro" required>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="input-group">
 												<span class="input-group-addon"><i class="fa fa-truck"></i></span>
-												<input type="text" class="form-control" placeholder="CEP" name="cep">
+												<input type="text" class="form-control" placeholder="CEP" name="cep" required>
 											</div>
 										</div>
 										<div class="col-md-9">
 											<div class="input-group">
 												<span class="input-group-addon"><i class="fa fa-truck"></i></span>
-												<input type="text" class="form-control" placeholder="Endereço" name="endereco">
+												<input type="text" class="form-control" placeholder="Endereço" name="endereco" required>
 											</div>
 										</div>
 										<div class="col-md-3">
 											<div class="input-group">
 												<span class="input-group-addon"><i class="fa fa-truck"></i></span>
-												<input type="number" class="form-control" placeholder="Número" name="numero">
+												<input type="number" class="form-control" placeholder="Número" name="numero" required>
+											</div>
+										</div>
+										<div class="col-md-9">
+											<div class="input-group">
+												<span class="input-group-addon"><i class="fa fa-truck"></i></span>
+												<input type="text" class="form-control" placeholder="Complemento" name="complemento" required>
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="input-group">
+												<span class="input-group-addon"><i class="fa fa-truck"></i></span>
+												<input type="text" class="form-control" placeholder="UF" name="UF" required>
+											</div>
+										</div>
+										<div class="col-md-12">
+											<div class="input-group">
+												<span class="input-group-addon"><i class="fa fa-truck"></i></span>
+												<input type="text" class="form-control" placeholder="Ponto de Referência" name="referencia">
 											</div>
 										</div>
 									</div>
@@ -199,17 +233,22 @@ include("php/comandos.php");
 											<div class="form-group">
 												<div class="checkbox">
 													<label>
-														<input type="checkbox" name="termsuse">Concordo com os <a href="termsofuse.php">Termos de Uso</a>
+														<input type="checkbox" name="termsuse">Concordo com os <a href="termsofuse.php" required>Termos de Uso</a>
 													</label>
 												</div>
 												<div class="checkbox">
 													<label>
-														<input type="checkbox" name="termprivacy">Concordo com os <a href="termsofprivacy.php">Termos de Privacidade</a>
+														<input type="checkbox" name="termprivacy">Concordo com os <a href="termsofprivacy.php" required>Termos de Privacidade</a>
 													</label>
 												</div>
 												<div class="checkbox">
 													<label>
 														<input type="checkbox" name="newsletter">Desejo receber no meu email cadastrado not&iacute;cias, newsletter e promo&ccedil;&otilde;es de Print Ideas</a>
+													</label>
+												</div>
+											<div class="checkbox">
+													<label>
+														<input type="checkbox" name="promocoes">Desejo receber no meu email cadastrado promoções de Print Ideas</a>
 													</label>
 												</div>
 											</div>

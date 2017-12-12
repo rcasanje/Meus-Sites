@@ -22,4 +22,10 @@ function arrayToString($array){
 	
 	return $data;
 }
+
+function encryptInfo($string, $algo="sha512"){
+	$encrypted = "";
+	$encrypted = hash($algo, $string);
+	return $encrypted;
+}
 ?>

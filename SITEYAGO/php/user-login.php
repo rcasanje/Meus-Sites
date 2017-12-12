@@ -1,27 +1,31 @@
 <?php
 include("conexoes/user-access.php");
+include("comandos.php");
+
 if(!isset($_SESSION)) session_start();
 
-$login = $_POST['login'];
-$senha = $_POST['senha'];;
+$apelido = $_POST['apelido'];
+$senha = encryptInfo($_POST['senha']);
 
-$dados = "SELECT nome_user, login_user, senha_user, permissao_user FROM usuarios WHERE login_user='$login' and senha_user='$senha'";
+$dados = "SELECT * FROM contas WHERE apelido_con='$apelido'";
+
 if($query = mysqli_query($conn, $dados)){
-	if ($info = mysqli_fetch_array($query, MYSQL_ASSOC)){
-		$_SESSION['User']['Nome'] = $info['nome_user'];
-		$_SESSION['User']['Login'] = $info['login_user'];
-		$_SESSION['User']['Permissao'] = $info['permissao_user'];
+	if(mysqli_fetch_array($query, MYSQLI_ASSOC)){
+		printf('Login efetuado com sucesso');
+		$_SESSION['Erro']['login'] = "Login efetuado com sucesso";
+		$_SESSION['User']['ID'] = $apelido;
+		printf('ID Conta: %s', $apelido);
+		session_write_close();
+		header("Location: ../painel.php");
 	} else{
-		$_SESSION['Erro']['Login'] = 10;
+		printf('Usuário inexistente');
+		$_SESSION['Erro']['login'] = 'Usuário inexistente';
+		session_write_close();
+		header("Location: ../acesso.php");
 	}
-	
 } else{
-	$_SESSION['Erro']['Login'] = mysqli_errno($conn);
+	printf('Erro #:%s<br>Descrição: %s<br>', mysqli_errno($conn), mysqli_error($conn));
+	$_SESSION['Erro']['login'] = mysqli_error($conn);
+	header("Location: ../acesso.php");
 }
-
-header("Location: ../conta.php");
-
-session_write_close();
-mysqli_free_result($query);
-mysqli_close($conn);
 ?>

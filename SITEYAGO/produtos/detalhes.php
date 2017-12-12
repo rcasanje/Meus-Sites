@@ -4,11 +4,18 @@ include("../php/printideas-comandos.php");
 include("../php/comandos.php");
 $produto = $_GET['codigo'];
 
-$dados = "SELECT * FROM produtos WHERE codigo_prod='$produto'";
+$dados = "SELECT codigo_prod, imagem_prod, nome_prod, tamanho_prod, prazo_prod, qntd_prod, preco_prod FROM produtos WHERE codigo_prod='$produto'";
 
 //printf('<div>Página selecionada: %s<br> Dados: %s</div>', $produto, $dados);
 if($query = mysqli_query($conn, $dados)){
 	$info = mysqli_fetch_array($query, MYSQLI_ASSOC);
+	$nomeImg = $info['imagem_prod'];
+	$caminhoImg = explode(";", $nomeImg);
+	$nomeProd = $info['nome_prod'];
+	$tamanhoProd = $info['tamanho_prod'];
+	$prazo = $info['prazo_prod'];
+	$qntd = $info['qntd_prod'];
+	$preco = $info['preco_prod'];
 }
 
 if(!isset($_SESSION)) session_start();
@@ -63,25 +70,38 @@ if(isset($_SESSION['Produtos']['quantidade'])){
 								<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 									<!-- Indicators -->
 									<ol class="carousel-indicators">
-										<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-										<li data-target="#carousel-example-generic" data-slide-to="1"></li>
-										<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+										<?php
+										for($i = 0; $i < count($caminhoImg) -1; $i++){
+											if($i == 0){
+												printf('<li data-target="#carousel-example-generic" data-slide-to="%s" class="active"></li>', $i);
+											} else{
+												printf('<li data-target="#carousel-example-generic" data-slide-to="%s"></li>', $i);
+											}
+										}
+										?>
 									</ol>
 
 									<!-- Wrapper for slides -->
 									<div class="carousel-inner" role="listbox">
-										<div class="item active">
-											<p align="center"><img src="../images/Produtos/default.png" alt="..."></p>
-											<div class="carousel-caption">...</div>
-										</div>
-										<div class="item">
-											<p align="center"><img src="../images/Produtos/default.png" alt="..."></p>
-											<div class="carousel-caption">...</div>
-										</div>
-										<div class="item">
-											<p align="center"><img src="../images/Produtos/default.png" alt="..."></p>
-											<div class="carousel-caption">...</div>
-										</div>
+										<?php
+										for($i = 0; $i < count($caminhoImg) -1; $i++){
+											if($i == 0){
+												printf('
+												<div class="item active">
+													<p align="center">
+														<img src="../images/Produtos/%s" alt="nomeProduto" width="100%%">
+													</p>
+												</div>', $caminhoImg[$i]);
+											} else{
+												printf('
+												<div class="item">
+													<p align="center">
+														<img src="../images/Produtos/%s" alt="nomeProduto" width="100%%">
+													</p>
+												</div>', $caminhoImg[$i]);
+											}
+										}
+										?>
 									</div>
 
 									<!-- Controls -->
@@ -117,7 +137,7 @@ if(isset($_SESSION['Produtos']['quantidade'])){
 										</div>
 									</div>
 									<div class="col-xs-12 col-md-6">
-										<button class="font size-18 btn btn-block btn-success" type="button" onClick="adicionarCarrinho('<?php echo($info['codigo_prod']); ?>');"><i class="fa fa-cart-plus"></i> Comprar</button>
+										<button class="font size-18 btn btn-block btn-success" type="button" onClick="adicionarCarrinho('<?=$info['codigo_prod']; ?>', '<?=$abspath ?>');"><i class="fa fa-cart-plus"></i> Comprar</button>
 										<br>
 										<div class="font size-18">
 											<p><i class="fa fa-truck"> Calcular frete e prazo<input class="form-control" type="text"></i></p>
@@ -130,12 +150,12 @@ if(isset($_SESSION['Produtos']['quantidade'])){
 					<div class="box-footer">
 						<div id="especs">
 							<label style="color: red">ESPECIFICAÇÕES</label>
-							<p id="productID">ID: <?php echo($info['codigo_prod']); ?>	</p>
-							<p class="margin-10">Marca</p>
-							<p class="margin-10">Modelo</p>
-							<p class="margin-10">Tipo de impressao</p>
-							<p class="margin-10">Tamanho</p>
-							<p class="margin-10">Tipo do Papel</p>
+							<p id="productID">ID: <?php echo($info['codigo_prod']); ?></p>
+							<p class="margin-10">Nome do produto: <?php echo($nomeProd); ?></p>
+							<p class="margin-10">Quantidade por impress&ccedil;o: <?php echo($qntd); ?></p>
+							<p class="margin-10">Tipo de impressao: Unavaible</p>
+							<p class="margin-10">Tamanho: <?php echo($tamanhoProd); ?></p>
+							<p class="margin-10">Tempo de produ&ccedil;&aacute;o: <?php echo($prazo); ?></p>
 						</div>
 					</div>
 				</div>

@@ -1,1 +1,26 @@
-.gradiente-lightblue{background:#2395FF;background:-webkit-radial-gradient(#88C5FF, #2395FF);background:-o-radial-gradient(#88C5FF, #2395FF);background:-moz-radial-gradient(#88C5FF, #2395FF);background:radial-gradient(#88C5FF, #2395FF)}.solido-white{background-color:white;border-radius:10px}.alinhar-esquerda{position:relative;float:left;margin:10px}.inputTransparente{border:none;background:none}.size-18{font-size:18px}.margin-10{margin-top:-10px}
+.gradiente-lightblue {
+  background: #2395FF;
+  /* For browsers that do not support gradients */
+  background: -webkit-radial-gradient(#88C5FF, #2395FF);
+  /* Safari 5.1 to 6.0 */
+  background: -o-radial-gradient(#88C5FF, #2395FF);
+  /* For Opera 11.6 to 12.0 */
+  background: -moz-radial-gradient(#88C5FF, #2395FF);
+  /* For Firefox 3.6 to 15 */
+  background: radial-gradient(#88C5FF, #2395FF);
+  /* Standard syntax */ }
+
+.solido-white {
+  background-color: white;
+  border-radius: 10px; }
+
+.alinhar-esquerda {
+  position: relative;
+  float: left;
+  margin: 10px; }
+
+.inputTransparente {
+  border: none;
+  background: none; }
+
+/* BOOTSTRAP */

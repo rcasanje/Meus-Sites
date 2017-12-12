@@ -58,6 +58,7 @@ if(isset($_SESSION['Produtos'])){
 								<th># item</th>
 								<th>Item</th>
 								<th>Pre&ccedil;o Un. / Pre&ccedil;o Total</th>
+								<th>Quantidade</th>
 								<th>A&ccedil;&otilde;es</th>
 							</tr>
 						</thead>
@@ -69,7 +70,7 @@ if(isset($_SESSION['Produtos'])){
 								$posSearch = 0;
 								
 								$saveProduct = $produtos;
-								printf("Produtos Salvos: %s<br>", $saveProduct);
+								//printf("Produtos Salvos: %s<br>", $saveProduct);
 																
 								while($saveProduct != ""){
 									$posSearch = strpos($saveProduct, ",");
@@ -86,14 +87,14 @@ if(isset($_SESSION['Produtos'])){
 									$idprodut[$index] = $setID;
 									$qntdprodut[$index] = $setQntd;
 									
-									printf("Edição: %s<br>", $saveProduct);
+									//printf("Edição: %s<br>", $saveProduct);
 									$saveProduct = substr($saveProduct, $posSearch+1, strlen($saveProduct));
 									
 									$index++;
 								}
 								
 								$dados = "SELECT * FROM produtos WHERE codigo_prod IN ($idQuery)";
-								printf("Dados: %s<br>", $dados);
+								//printf("Dados: %s<br>", $dados);
 								
 								if($query = mysqli_query($conn, $dados)){
 									$index = 1;
@@ -101,17 +102,24 @@ if(isset($_SESSION['Produtos'])){
 									while($prod = mysqli_fetch_array($query)){
 										$precoUn = substr($prod['preco_prod'], 2);
 										$precoTotal = $precoUn*$qntdprodut[$index];
-										echo "Preco: ".$precoUn;
+										//echo "Preco: ".$precoUn;
 										printf('<tr scope="row">');
 											printf('<td>
 												<input class="inputTransparente" type="text" name="itemId%s" value="%s" readonly>
 											</td>', $index, $idprodut[$index]);
-											printf('<td><input class="inputTransparente" type="text" name="itemDescription%s" value="%s" readonly></td>', $index, $prod['nome_prod']);
 											printf('<td>
-														<label id="precoun%s">R$ %s / </label>
-														<input class="inputTransparente" type="text" id="itemAmount%s" name="itemAmount%s" value="%s" readonly>
-													</td>', $index, $precoUn, $index, $index, number_format($precoTotal, 2));
-											printf('<td>Qntd: <input class="inputTransparente" type="number" id="itemQuantity%s" name="itemQuantity%s" value="1" width="10px" onChange="atualizarPreco(%s);"> | Excluir</td>', $index, $index, $index);
+												<textarea class="inputTransparente" type="text" name="itemDescription%s" cols="105" readonly>%s</textarea>
+											</td>', $index, $prod['nome_prod']);
+											printf('<td>
+												<input class="inputTransparente" type="text"  id="precoun%s" name="itemAmount%s" value="%s" readonly>
+												<label id="itemAmount%s">%s</label>
+											</td>', $index, $index, $precoUn, $index, number_format($precoTotal, 2));
+											printf('<td>
+												Qntd: <input class="inputTransparente" type="number" id="itemQuantity%s" name="itemQuantity%s" value="%s" width="10px" min="1" onChange="atualizarPreco(%s);">
+											</td>', $index, $index, $qntdprodut[$index], $index);
+											printf('<td>
+												<button class="btn btn-warning" type="button" onClick="removerCarrinho("%s");">Remover produto</button>
+											</td>', $idprodut[$index]);
 										printf('</tr>');
 										$index++;
 									}
@@ -146,13 +154,11 @@ if(isset($_SESSION['Produtos'])){
 		});
 		
 		function atualizarPreco(num){
-			var valor = document.getElementById('precoun' + num).innerHTML;
+			var valor = document.getElementById('precoun' + num).value;
 			var valortotal = document.getElementById('itemAmount' + num);
 			var quantidade = document.getElementById('itemQuantity' + num).value;
 			
-			valor = valor.substr(3, valor.length-6)
-			
-			valortotal.value = parseFloat((parseFloat(valor)*parseInt(quantidade)).toFixed(3));
+			valortotal.innerHTML = parseFloat((parseFloat(valor)*parseInt(quantidade)).toFixed(3));
 		}
 	</script>
 </html>
