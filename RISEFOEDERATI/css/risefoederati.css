@@ -1,0 +1,49 @@
+/* GLOBAL */
+body{
+	background-color: black;
+}
+
+.jumbotron h1{
+	color: white;
+}
+
+#conteudo{
+	margin-top: 20px;
+}
+/* END GLOBAL */
+
+/* INDEX PAGE*/ 
+#jumbotron-banner{
+	height: 500px; 
+	background-image: url(../images/banner-intro.png);
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+/* END INDEX PAGE*/ 
+
+/* GALLERY PAGE */
+#gallery{
+	background-image: url(../images/gallery-background.jpg);
+	background-position: center;
+	background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+/* END GALLERY PAGE */
+
+/* TRIBES PAGES */
+#tribes{
+	background-image: url(../images/tribes-background.jpg);
+	background-position: center;
+	background-repeat: no-repeat;
+    background-attachment: fixed;
+	color: goldenrod;
+}
+/* END TRIBES PAGES */
+
+/* GRIDDER */
+.fas{
+	margin-right: 10px;
+	color: white;
+	font-size: 50px;
+}
