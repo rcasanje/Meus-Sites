@@ -17,3 +17,6 @@
   
 6. TimerCoin
   - Started: 06/08/2015
+  
+7. Rise of the Fioderati
+  - Started: 13/12/2017
