@@ -3,6 +3,16 @@ body{
 	background-color: black;
 }
 
+body a{
+	text-decoration: none;
+	color: goldenrod;
+}
+
+body a:hover{
+	text-decoration: none;
+	color: goldenrod;
+}
+
 .jumbotron h1{
 	color: white;
 }
@@ -29,6 +39,12 @@ body{
 	background-repeat: no-repeat;
     background-attachment: fixed;
 }
+
+.gridder .fas{
+	margin-right: 10px;
+	color: white;
+	font-size: 50px;
+}
 /* END GALLERY PAGE */
 
 /* TRIBES PAGES */
@@ -39,11 +55,38 @@ body{
     background-attachment: fixed;
 	color: goldenrod;
 }
-/* END TRIBES PAGES */
 
-/* GRIDDER */
-.fas{
-	margin-right: 10px;
+#tribes p{
 	color: white;
-	font-size: 50px;
+	text-align: center;
 }
+
+#tribes label{
+	color: black;
+}
+
+#tribes h1, h2, h4{
+	text-align: center;
+}
+
+#infantary{
+	background-color: lightyellow;
+	padding: 10px;
+	border: 1px black solid;
+	border-radius: 10px;
+	text-align: center;
+}
+
+#infantary-body p{
+	color: black;
+}
+/* END TRIBES PAGES */
+/* DOWNLOAD PAGE */
+#download{
+	background-image: url(../images/download-background.jpg);
+	background-position: center;
+	background-repeat: no-repeat;
+    background-attachment: fixed;
+	color: goldenrod;
+}
+/* END DOWNLOAD PAGE */
