@@ -3,12 +3,14 @@ var confirmaSenha = false;
 var confirmaEmail = false;
 
 function verificarQuantidade(num){
+	'use strict';
 	document.getElementById('carrinhoQntd').innerHTML = qntd;
 }
 
 
 function adicionarCarrinho(id, path){
-	aqntd = parseInt(document.getElementById('carrinhoQntd').innerHTML);
+	'use strict';
+	var aqntd = parseInt(document.getElementById('carrinhoQntd').innerHTML);
 	
 	qntd = aqntd+1;
 	jQuery.ajax({
@@ -17,33 +19,31 @@ function adicionarCarrinho(id, path){
 		data: {qntd:qntd, id:id},
 		success: function( data )
 		{
-			alert(data);
+			//alert(data);
 		}
 	});
 
 	document.getElementById('carrinhoQntd').innerHTML = qntd;
 }
 
-function removerCarrinho(id){
+function removerCarrinho(id, qntd){	
+	'use strict';
 	var aqntd = parseInt(document.getElementById('carrinhoQntd').innerHTML);
-	
-	qntd = aqntd-1;
-	
 	jQuery.ajax({
 		type: "POST",
-		url: "php/carrinho-adicionar.php",
-		data: {qntd:qntd, id:id},
+		url: "php/carrinho-remover.php",
+		data: {id:id, qntd:qntd},
 		success: function( data )
 		{
-			alert(data);
+			//alert(data);
+			document.getElementById('carrinhoQntd').innerHTML = aqntd - qntd;
 			window.location.reload();
 		}
 	});
-	
-	document.getElementById('carrinhoQntd').innerHTML = qntd - 1;
 }
 
 function habilitarEnvio(){
+	'use strict';
 	var btnEnviar = document.getElementById('enviarRegistro');
 	
 	if(confirmaSenha == true && confirmaEmail == true){
@@ -54,6 +54,7 @@ function habilitarEnvio(){
 }
 
 function verificarSenha(){
+	'use strict';
 	var senha = document.getElementById('senha');
 	var csenha = document.getElementById('csenha');
 	
@@ -71,6 +72,7 @@ function verificarSenha(){
 }
 
 function verificarEmail(){
+	'use strict';
 	var email = document.getElementById('email');
 	var cemail = document.getElementById('cemail');
 	

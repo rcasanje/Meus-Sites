@@ -77,14 +77,14 @@ include("php/comandos.php");
 									<div style="color: white; padding: 10px;">
 										<h1>EMPRESA</h1>
 										<p><b>Para sua empresa ficar com sua cara</b></p>
-										<p><a class="btn btn-primary btn-lg" href="#" role="button">Veja mais</a></p>
+										<p><a class="btn btn-primary btn-lg" href="personalizado/para-empresa.php" role="button">Veja mais</a></p>
 									</div>
 								</div>
 								<div class="jumbotron bg-img-fit" style="background-image: url(images/Para-festa.jpg); background-size: 100% 100%;">	
 									<div style="color: white; padding: 10px;">
 										<h1>FESTA</h1>
 										<p><b>Para dar aquela festa com estilo</b></p>
-										<p><a class="btn btn-primary btn-lg" href="#" role="button">Veja mais</a></p>
+										<p><a class="btn btn-primary btn-lg" href="personalizado/para-festa.php" role="button">Veja mais</a></p>
 									</div>
 								</div>
 							</div>
@@ -93,14 +93,14 @@ include("php/comandos.php");
 									<div style="color: white; padding: 10px;">
 										<h1>DESIGN</h1>
 										<p><b>Para o seu design pessoal</b></p>
-										<p><a class="btn btn-primary btn-lg" href="#" role="button">Veja mais</a></p>
+										<p><a class="btn btn-primary btn-lg" href="personalizado/para-design.php" role="button">Veja mais</a></p>
 									</div>
 								</div>
 								<div class="jumbotron bg-img-fit" style="background-image: url(images/Para-casa.jpg); background-size: 100% 100%;">	
 									<div style="color: white; padding: 10px;">
 										<h1>CASA</h1>
 										<p><b>Para embelezar sua casa</b></p>
-										<p><a class="btn btn-primary btn-lg" href="#" role="button">Veja mais</a></p>
+										<p><a class="btn btn-primary btn-lg" href="personalizado/para-casa.php" role="button">Veja mais</a></p>
 									</div>
 								</div>
 							</div>
@@ -151,29 +151,7 @@ include("php/comandos.php");
 		</div>
 
 		<footer class="main-footer">
-			<div class="row">
-				<div class="col-md-6">
-					<h4>Contatos</h4>
-					<ul type="none" style="margin-left: -5%">
-						<li>(16) 99626-2085</li>
-						<li>(16) 99626-8904</li>
-						<li>minhaideiaimpressa@gmail.com</li>
-					</ul>
-				</div>
-				<div class="col-md-6">
-					<h4>Parceria</h4>
-					<ul type="none" style="margin-left: -5%">
-						<li>Parceria 01</li>
-						<li>Parceria 02</li>
-						<li>Parceria 03</li>
-						<li>Seja nosso parceiro</li>
-					</ul>
-				</div>
-			</div>
-			<div class="pull-right hidden-xs">
-				<b>Version</b> 1.0
-			</div>
-			<strong>Copyright &copy; 2017 <a href="https://adminlte.io">Atual MK</a>.</strong> All rights reserved.
+			<?php include("php/rodape.php"); ?>
 		</footer>
 		<div class="control-sidebar-bg"></div>
 	</div>

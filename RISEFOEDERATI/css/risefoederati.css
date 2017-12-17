@@ -13,6 +13,10 @@ body a:hover{
 	color: goldenrod;
 }
 
+nav{
+	opacity: 0.90;
+}
+
 .jumbotron h1{
 	color: white;
 }
@@ -20,9 +24,32 @@ body a:hover{
 #conteudo{
 	margin-top: 20px;
 }
+
+.black-box{
+	background-color: rgba(0,0,0,0.5);
+	
+	border: 1px solid goldenrod;
+	border-radius: 10px;
+	padding: 10px;
+}
 /* END GLOBAL */
 
 /* INDEX PAGE*/ 
+#index{
+	background-image: url(../images/gallery-background.jpg);
+	background-position: center;
+	background-repeat: no-repeat;
+    background-attachment: fixed;
+	
+	color: goldenrod;
+	
+	text-align: center;
+}
+
+#index p{
+	color: white;
+}
+
 #jumbotron-banner{
 	height: 500px; 
 	background-image: url(../images/banner-intro.png);
@@ -69,6 +96,16 @@ body a:hover{
 	text-align: center;
 }
 
+/*#scroll{
+	background-image: url(../images/Scroll.png);
+	background-repeat: no-repeat;
+	background-size: contain;
+	
+	padding-top: 150px;
+	padding-left: 50px;
+	padding-right: 50px;
+}*/
+
 #infantary{
 	background-color: lightyellow;
 	padding: 10px;
@@ -88,5 +125,40 @@ body a:hover{
 	background-repeat: no-repeat;
     background-attachment: fixed;
 	color: goldenrod;
+	text-align: center;
+}
+
+#download p {
+	color: white;
 }
 /* END DOWNLOAD PAGE */
+
+/* ABOUT PAGE */
+#about{
+	background-image: url(../images/about-background.jpg);
+	background-position: center;
+    background-attachment: fixed;
+	
+	color: darkgoldenrod;
+	text-align: center;
+}
+
+#about #conteudo{
+	background-image: url(../images/Scroll2.jpg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	
+	padding: 10px;
+}
+
+#about p{
+	color: black;
+	text-align: left;
+}
+
+#about ul{
+	color: black;
+	text-align: justify;
+}
+/* END ABOUT PAGE */

@@ -70,7 +70,7 @@ if(isset($_SESSION['User']['ID'])){
 								$posSearch = 0;
 								
 								$saveProduct = $produtos;
-								printf("Produtos Salvos: %s<br>", $saveProduct);
+								//printf("Produtos Salvos: %s<br>", $saveProduct);
 																
 								while($saveProduct != ""){
 									$posSearch = strpos($saveProduct, ",");

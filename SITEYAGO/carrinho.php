@@ -52,7 +52,7 @@ if(isset($_SESSION['Produtos'])){
 				<form id="fecharCarrinho" action="php/gerarCompra.php" method="post">
 					<input type="text" name="currency" value="BRL" readonly hidden>
 
-					<table id="itensCarrinho" class="display" cellspacing="0" width="100%">
+					<table id="itensCarrinho" class="display" width="100%">
 						<thead>
 							<tr>
 								<th># item</th>
@@ -108,18 +108,18 @@ if(isset($_SESSION['Produtos'])){
 												<input class="inputTransparente" type="text" name="itemId%s" value="%s" readonly>
 											</td>', $index, $idprodut[$index]);
 											printf('<td>
-												<textarea class="inputTransparente" type="text" name="itemDescription%s" cols="105" readonly>%s</textarea>
+												<textarea class="inputTransparente" type="text" name="itemDescription%s" cols="50" readonly style="width: 100%%">%s</textarea>
 											</td>', $index, $prod['nome_prod']);
 											printf('<td>
-												<input class="inputTransparente" type="text"  id="precoun%s" name="itemAmount%s" value="%s" readonly>
+												<input class="inputTransparente inputAdapt" type="text"  id="precoun%s" name="itemAmount%s" value="%s" readonly>
 												<label id="itemAmount%s">%s</label>
 											</td>', $index, $index, $precoUn, $index, number_format($precoTotal, 2));
 											printf('<td>
-												Qntd: <input class="inputTransparente" type="number" id="itemQuantity%s" name="itemQuantity%s" value="%s" width="10px" min="1" onChange="atualizarPreco(%s);">
+												Qntd: <input class="inputTransparente inputAdapt" type="number" id="itemQuantity%s" name="itemQuantity%s" value="%s" width="10px" min="1" onChange="atualizarPreco(%s);">
 											</td>', $index, $index, $qntdprodut[$index], $index);
 											printf('<td>
-												<button class="btn btn-warning" type="button" onClick="removerCarrinho("%s");">Remover produto</button>
-											</td>', $idprodut[$index]);
+												<button class="btn btn-warning" type="button" onClick="%s">Remover produto</button>
+											</td>', "removerCarrinho('".$idprodut[$index]."', ".$qntdprodut[$index].");");
 										printf('</tr>');
 										$index++;
 									}
@@ -162,10 +162,3 @@ if(isset($_SESSION['Produtos'])){
 		}
 	</script>
 </html>
-
-
-<style>
-	#nqntd{
-		width: 10%;
-	}
-</style>

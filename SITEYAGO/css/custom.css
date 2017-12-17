@@ -1,3 +1,4 @@
+/* GLOBAL */
 .gradiente-lightblue {
   background: #2395FF;
   /* For browsers that do not support gradients */
@@ -23,4 +24,10 @@
   border: none;
   background: none; }
 
-/* BOOTSTRAP */
+.inputAdapt{
+	width: 50px;
+	max-width: 100%;
+}
+/* END GLOBAL */
+/* BOOTSTRAP*/
+/* END BOOTSTRAP */
